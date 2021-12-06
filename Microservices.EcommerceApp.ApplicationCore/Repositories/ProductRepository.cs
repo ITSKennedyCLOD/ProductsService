@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dapper;
+using Microservices.EcommerceApp.ApplicationCore.Interfaces;
 
-namespace Microservices.EcommerceApp.ApplicationCore
+namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 {
     public class ProductRepository : IProductRepository
     {

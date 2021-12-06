@@ -1,5 +1,6 @@
 ﻿using Microservices.Ecommerce.DTO;
 using Microservices.EcommerceApp.ApplicationCore;
+using Microservices.EcommerceApp.ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

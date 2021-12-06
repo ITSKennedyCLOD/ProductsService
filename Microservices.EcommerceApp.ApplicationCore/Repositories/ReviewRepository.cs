@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microservices.Ecommerce.DTO;
+using Microservices.EcommerceApp.ApplicationCore.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microservices.EcommerceApp.ApplicationCore
+namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 {
     public class ReviewRepository : IReviewRepository
     {

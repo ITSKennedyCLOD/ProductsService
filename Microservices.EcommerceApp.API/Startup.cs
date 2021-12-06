@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MassTransit;
+using Microservices.EcommerceApp.ApplicationCore.Interfaces;
+using Microservices.EcommerceApp.ApplicationCore.Repositories;
 
 namespace Microservices.EcommerceApp.API
 {
