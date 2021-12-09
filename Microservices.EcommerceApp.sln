@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.EcommerceApp.API", "Microservices.EcommerceApp.API\Microservices.EcommerceApp.API.csproj", "{C139FD0B-2CDA-4910-8FC4-2EA47E46AB29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.EcommerceApp.API", "Microservices.EcommerceApp.API\Microservices.EcommerceApp.API.csproj", "{C139FD0B-2CDA-4910-8FC4-2EA47E46AB29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.EcommerceApp.ApplicationCore", "Microservices.EcommerceApp.ApplicationCore\Microservices.EcommerceApp.ApplicationCore.csproj", "{6514AF58-8DB7-48B2-9D9F-BE5BA3592E32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.EcommerceApp.ApplicationCore", "Microservices.EcommerceApp.ApplicationCore\Microservices.EcommerceApp.ApplicationCore.csproj", "{6514AF58-8DB7-48B2-9D9F-BE5BA3592E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gruppo3.ClientiDTO.Domain", "Gruppo3.ClientiDTO.Domain.Events\Gruppo3.ClientiDTO.Domain.csproj", "{A50A1BBC-B180-4138-86ED-9069C447E38D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6514AF58-8DB7-48B2-9D9F-BE5BA3592E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6514AF58-8DB7-48B2-9D9F-BE5BA3592E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6514AF58-8DB7-48B2-9D9F-BE5BA3592E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A50A1BBC-B180-4138-86ED-9069C447E38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A50A1BBC-B180-4138-86ED-9069C447E38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A50A1BBC-B180-4138-86ED-9069C447E38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A50A1BBC-B180-4138-86ED-9069C447E38D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

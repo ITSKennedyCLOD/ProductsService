@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gruppo3.ClientiDTO.Domain.Events\Gruppo3.ClientiDTO.Domain.csproj" />
     <ProjectReference Include="..\Microservices.EcommerceApp.ApplicationCore\Microservices.EcommerceApp.ApplicationCore.csproj" />
   </ItemGroup>
 
