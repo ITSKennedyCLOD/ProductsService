@@ -23,10 +23,15 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
             using var connection = new SqlConnection(_connectionString);
 
             const string query = @"
-                
+                INSERT INTO [dbo].[cliente]
+                    ([nome]
+                    ,[ragione_sociale])
+                VALUES
+                    (@Name
+                    ,@Businessname)
             ";
 
-            return connection.ExecuteAsync(query, new { });
+            return connection.ExecuteAsync(query, client);
         }
 
         public Task DeleteClient(int id)
@@ -45,10 +50,12 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
             using var connection = new SqlConnection(_connectionString);
 
             const string query = @"
-                
-            ";
+                UPDATE [dbo].[cliente]
+                   SET [nome] = @Name
+                      ,[ragione_sociale] = @Businessname
+                 WHERE id=@Id";
 
-            return connection.ExecuteAsync(query, new { });
+            return connection.ExecuteAsync(query, client);
         }
     }
 }

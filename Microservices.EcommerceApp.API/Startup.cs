@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using MassTransit;
 using Microservices.EcommerceApp.ApplicationCore.Interfaces;
 using Microservices.EcommerceApp.ApplicationCore.Repositories;
+using Microservices.EcommerceApp.API.Consumer.ClientConsumers;
+using Microservices.EcommerceApp.API.Consumer.Order;
 
 namespace Microservices.EcommerceApp.API
 {
@@ -39,6 +41,7 @@ namespace Microservices.EcommerceApp.API
 
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<IReviewRepository, ReviewRepository>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
 
             services.AddMassTransit(
                 x =>
@@ -47,17 +50,54 @@ namespace Microservices.EcommerceApp.API
                     {
 
                         config.Host(
-                            "localhost",
-                            "/",
+                            "roedeer.rmq.cloudamqp.com",
+                            "vpeeygzh",
                             credential =>
                             {
-                                credential.Username("admin");
-                                credential.Password("password");
+                                credential.Username("vpeeygzh");
+                                credential.Password("t0mDd3KRsJkXRV3DXzmCUfRWmDFbFu42");
                             }
                         );
 
                         config.ConfigureEndpoints(context);
 
+                        config.ReceiveEndpoint("gruppo2-CreateClientQueue", e =>
+                        {
+                            e.Consumer<CreateClientConsumer>(context);
+
+                        });
+
+
+                        config.ReceiveEndpoint("gruppo2-DeleteClientQueue", e =>
+                        {
+                            e.Consumer<DeleteClientConsumer>(context);
+
+                        });
+
+                        config.ReceiveEndpoint("gruppo2-UpdateClientQueue", e =>
+                        {
+                            e.Consumer<UpdateClientConsumer>(context);
+
+                        });
+
+                        config.ReceiveEndpoint("gruppo2-NewOrderQueue", e =>
+                        {
+                            e.Consumer<NewOrderConsumer>(context);
+
+                        });
+
+                        config.ReceiveEndpoint("gruppo2-DeleteOrderQueue", e =>
+                        {
+                            
+                            e.Consumer<DeleteOrderConsumer>(context);
+
+                        });
+
+                        config.ReceiveEndpoint("gruppo2-UpdateOrderQueue", e =>
+                        {
+                            e.Consumer<UpdateOrderConsumer>(context);
+
+                        });
 
                     });
                 }

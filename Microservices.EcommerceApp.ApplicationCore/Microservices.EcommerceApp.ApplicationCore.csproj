@@ -6,13 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Microservices.Ecommerce.DTO" Version="2.0.0" />
+    <PackageReference Include="Microservices.Ecommerce.DTO" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Gruppo3.ClientiDTO.Domain.Events\Gruppo3.ClientiDTO.Domain.csproj" />
+    <ProjectReference Include="..\Gruppo4MicroserviziDTO\Gruppo4MicroserviziDTO.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using Microservices.Ecommerce.DTO;
+﻿using MassTransit;
+using Microservices.Ecommerce.DTO;
 using Microservices.EcommerceApp.ApplicationCore;
 using Microservices.EcommerceApp.ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservices.Ecommerce.DTO.Events;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,45 +18,79 @@ namespace Microservices.EcommerceApp.API.Controllers
     public class ProdottiController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
-        public ProdottiController(IProductRepository productRepository)
+        private readonly IPublishEndpoint _publishEndpoint;
+        public ProdottiController(IProductRepository productRepository, IPublishEndpoint publishEndpoint)
         {
             _productRepository = productRepository;
+            _publishEndpoint = publishEndpoint;
         }
         // GET: api/<ProdottiController>
         [HttpGet]
-        public async Task<IEnumerable<Prodotto>> Get()
+        public Task<IEnumerable<Prodotto>> Get()
         {
-            var list = await _productRepository.GetAll();
+            var list = _productRepository.GetAll();
             return list;
         }
 
         // GET api/<ProdottiController>/5
         [HttpGet("{id}")]
-        public async Task<Prodotto> Get(int id)
+        public Task<Prodotto> Get(int id)
         {
-            var prodotto = await _productRepository.GetById(id);
+            var prodotto = _productRepository.GetById(id);
             return prodotto;
         }
 
         // POST api/<ProdottiController>
         [HttpPost]
-        public async Task Post([FromBody] Prodotto prodotto)
+        public Task Post([FromBody] Prodotto prodotto)
         {
-            await _productRepository.Insert(prodotto);
+            _productRepository.Insert(prodotto);
+
+            _publishEndpoint.Publish<NewProductEvent>(new NewProductEvent 
+            {
+                
+                Aliquota = prodotto.Aliquota,
+                Marca = prodotto.Marca,
+                Nome = prodotto.Nome,
+                Descrizione = prodotto.Descrizione,
+                Prezzo = prodotto.Prezzo
+            });
+            return null;
         }
 
         // PUT api/<ProdottiController>/5
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Prodotto prodotto)
+        public Task Put(int id, [FromBody] Prodotto prodotto)
         {
-            await _productRepository.Update(prodotto);
+            prodotto.Id = id;
+
+            _productRepository.Update(prodotto);
+
+            _publishEndpoint.Publish<NewProductEvent>(new UpdateProductEvent
+            {
+                Id = prodotto.Id,
+                Marca = prodotto.Marca,
+                Nome = prodotto.Nome,
+                Descrizione = prodotto.Descrizione,
+                Prezzo = prodotto.Prezzo
+            });
+
+            return _productRepository.Update(prodotto);
         }
 
         // DELETE api/<ProdottiController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public Task Delete(int id)
         {
-            await _productRepository.Delete(id);
+
+            _productRepository.Delete(id);
+
+            _publishEndpoint.Publish<NewProductEvent>(new DeleteProductEvent
+            {
+                Id = id
+            });
+
+            return null;
         }
     }
 }
