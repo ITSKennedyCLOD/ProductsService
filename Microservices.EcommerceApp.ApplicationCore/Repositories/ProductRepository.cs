@@ -30,7 +30,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 
         public Task<IEnumerable<Prodotto>> GetAll()
         {
-            using var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(connectionString);
 
             const string query = @"
                 SELECT
@@ -42,9 +42,12 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                     ,[prezzo] as Prezzo
                 FROM Prodotto
             ";
-
-            var list = connection.QueryAsync<Prodotto>(query);
-            return list;
+            return connection.QueryAsync<Prodotto>(query)
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+                    return x.Result;
+                });
         }
 
         public async Task<Prodotto> GetById(int Id)
