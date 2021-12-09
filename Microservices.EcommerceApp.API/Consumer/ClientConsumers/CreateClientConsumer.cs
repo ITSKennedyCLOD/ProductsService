@@ -28,7 +28,8 @@ namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
                 Piva = context.Message.Piva,
                 Year = context.Message.Year,
                 Id = context.Message.Id
-            };   
+            };
+            
             await _clientRepository.CreateClient(client);
         }
     }

@@ -42,12 +42,21 @@ namespace Microservices.EcommerceApp.API
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<IReviewRepository, ReviewRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<IClientRepository, ClientRepository>();
 
             services.AddMassTransit(
                 x =>
                 {
+                    x.AddConsumer<CreateClientConsumer>();
+                    x.AddConsumer<DeleteClientConsumer>();
+                    x.AddConsumer<UpdateClientConsumer>();
+                    x.AddConsumer<NewOrderConsumer>();
+                    x.AddConsumer<DeleteOrderConsumer>();
+                    x.AddConsumer<UpdateOrderConsumer>();
+
                     x.UsingRabbitMq((context, config) =>
                     {
+                        
 
                         config.Host(
                             "roedeer.rmq.cloudamqp.com",

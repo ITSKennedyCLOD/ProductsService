@@ -11,7 +11,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Interfaces
     {
         public Task<IEnumerable<Prodotto>> GetAll();
         public Task<Prodotto> GetById(int Id);
-        public Task Insert(Prodotto prodotto);
+        public Task<int> Insert(Prodotto prodotto);
         public Task Update(Prodotto prodotto);
         public Task Delete(int Id);
 

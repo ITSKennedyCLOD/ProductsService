@@ -42,20 +42,19 @@ namespace Microservices.EcommerceApp.API.Controllers
 
         // POST api/<ProdottiController>
         [HttpPost]
-        public Task Post([FromBody] Prodotto prodotto)
+        public async Task Post([FromBody] Prodotto prodotto)
         {
-            _productRepository.Insert(prodotto);
+            var id = await _productRepository.Insert(prodotto);
 
-            _publishEndpoint.Publish<NewProductEvent>(new NewProductEvent 
+            await _publishEndpoint.Publish<NewProductEvent>(new NewProductEvent 
             {
-                
+                Id = id,
                 Aliquota = prodotto.Aliquota,
                 Marca = prodotto.Marca,
                 Nome = prodotto.Nome,
                 Descrizione = prodotto.Descrizione,
                 Prezzo = prodotto.Prezzo
             });
-            return null;
         }
 
         // PUT api/<ProdottiController>/5

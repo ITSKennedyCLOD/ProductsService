@@ -18,20 +18,24 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
         }
 
 
-        public Task CreateClient(Client client)
+        public async Task CreateClient(Client client)
         {
             using var connection = new SqlConnection(_connectionString);
 
             const string query = @"
                 INSERT INTO [dbo].[cliente]
-                    ([nome]
+                    (
+                    [id]
+                    ,[nome]
                     ,[ragione_sociale])
                 VALUES
-                    (@Name
+                    (
+                    @Id
+                    ,@Name
                     ,@Businessname)
             ";
 
-            return connection.ExecuteAsync(query, client);
+            await connection.ExecuteAsync(query, client);
         }
 
         public Task DeleteClient(int id)

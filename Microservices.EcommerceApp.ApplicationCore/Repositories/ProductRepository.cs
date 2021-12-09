@@ -35,7 +35,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
             const string query = @"
                 SELECT
                     [id] as Id,
-                    [nome] as Nome
+                    ,[nome] as Nome
                     ,[descrizione] as Descrizione
                     ,[aliquota] as Aliquota
                     ,[marca] as Marca
@@ -69,7 +69,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
             return prodotto;
         }
 
-        public async Task Insert(Prodotto prodotto)
+        public async Task<int> Insert(Prodotto prodotto)
         {
             using var connection = new SqlConnection(connectionString);
 
@@ -85,10 +85,13 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                        ,@Descrizione
                        ,@Aliquota
                        ,@Marca
-                       ,@Prezzo)
+                       ,@Prezzo);
+                SELECT SCOPE_IDENTITY();
             ";
 
-            await connection.ExecuteAsync(query, prodotto);
+            var id = await connection.ExecuteScalarAsync<int>(query, prodotto);
+
+            return id;
 
         }
 
