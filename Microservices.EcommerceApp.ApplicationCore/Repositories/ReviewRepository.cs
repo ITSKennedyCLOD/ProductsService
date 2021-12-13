@@ -26,7 +26,13 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                 DELETE FROM Recensioni WHERE id=@Id
             ";
 
-            return connection.ExecuteAsync(query, new { Id = Id });
+            return connection.ExecuteAsync(query, new { Id = Id })
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+
+                    return x.Result;
+                });
         }
 
         public Task<IEnumerable<Recensione>> GetAll(int Id)
@@ -58,8 +64,14 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                     
             ";
 
-            var recensioni = connection.QueryAsync<Recensione>(query, new { Id = Id });
-            return recensioni;
+            return connection.QueryAsync<Recensione>(query, new { Id = Id })
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+
+                    return x.Result;
+                });
+
         }
 
         public Task<Recensione> GetById(int Id)
@@ -91,8 +103,13 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                     R.id=@Id
             ";
 
-            var recensione = connection.QuerySingleAsync<Recensione>(query, new { Id = Id });
-            return recensione;
+            return connection.QuerySingleAsync<Recensione>(query, new { Id = Id })
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+
+                    return x.Result;
+                });
         }
 
         public Task Insert(Recensione recensione)
@@ -108,7 +125,13 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                        @Descrizione
             ";
 
-            return connection.ExecuteAsync(query, recensione);
+            return connection.ExecuteAsync(query, recensione)
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+
+                    return x.Result;
+                });
         }
 
         public Task Update(Recensione recensione)
@@ -124,7 +147,13 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                     id=@Id
             ";
 
-            return connection.ExecuteAsync(query, recensione);
+            return connection.ExecuteAsync(query, recensione)
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+
+                    return x.Result;
+                });
         }
     }
 }

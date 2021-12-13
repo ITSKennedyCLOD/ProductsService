@@ -16,7 +16,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
         {
             connectionString = configuration.GetConnectionString("Storage");
         }
-        public async Task Delete(int Id)
+        public Task Delete(int Id)
         {
             using var connection = new SqlConnection(connectionString);
 
@@ -24,7 +24,12 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                 DELETE FROM Prodotto WHERE id=@Id
             ";
 
-            await connection.ExecuteAsync(query, new { Id = Id });
+            return connection.ExecuteAsync(query, new { Id = Id })
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+                    return x.Result;
+                });
             
         }
 
@@ -50,7 +55,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                 });
         }
 
-        public async Task<Prodotto> GetById(int Id)
+        public Task<Prodotto> GetById(int Id)
         {
             using var connection = new SqlConnection(connectionString);
 
@@ -65,11 +70,16 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                 FROM Prodotto WHERE id=@Id
             ";
 
-            var prodotto = await connection.QuerySingleAsync<Prodotto>(query, new { Id = Id});
-            return prodotto;
+
+            return connection.QuerySingleAsync<Prodotto>(query, new { Id = Id })
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+                    return x.Result;
+                });
         }
 
-        public async Task<int> Insert(Prodotto prodotto)
+        public Task<int> Insert(Prodotto prodotto)
         {
             using var connection = new SqlConnection(connectionString);
 
@@ -89,13 +99,16 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                 SELECT SCOPE_IDENTITY();
             ";
 
-            var id = await connection.ExecuteScalarAsync<int>(query, prodotto);
-
-            return id;
+            return connection.ExecuteScalarAsync<int>(query, prodotto)
+                .ContinueWith(x => 
+                {
+                    connection.Dispose();
+                    return x.Result;
+                });
 
         }
 
-        public async Task Update(Prodotto prodotto)
+        public Task Update(Prodotto prodotto)
         {
             using var connection = new SqlConnection(connectionString);
 
@@ -110,7 +123,13 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
                     id=@Id
             ";
 
-            await connection.ExecuteAsync(query, prodotto);
+            return connection.ExecuteAsync(query, prodotto)
+                .ContinueWith(x =>
+                {
+                    connection.Dispose();
+
+                    return x.Result;
+                });
         }
     }
 }
