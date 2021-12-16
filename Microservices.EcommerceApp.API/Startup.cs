@@ -47,6 +47,7 @@ namespace Microservices.EcommerceApp.API
             services.AddMassTransit(
                 x =>
                 {
+
                     x.AddConsumer<CreateClientConsumer>();
                     x.AddConsumer<DeleteClientConsumer>();
                     x.AddConsumer<UpdateClientConsumer>();
@@ -70,9 +71,16 @@ namespace Microservices.EcommerceApp.API
 
                         config.ConfigureEndpoints(context);
 
-                        config.ReceiveEndpoint("gruppo2-CreateClientQueue", e =>
+                        config.ReceiveEndpoint("CreateClientCommands", e =>
                         {
                             e.Consumer<CreateClientConsumer>(context);
+
+                        });
+
+
+                        config.ReceiveEndpoint("gruppo2-CreateClientQueue", e =>
+                        {
+                            e.Consumer<DeleteClientConsumer>(context);
 
                         });
 

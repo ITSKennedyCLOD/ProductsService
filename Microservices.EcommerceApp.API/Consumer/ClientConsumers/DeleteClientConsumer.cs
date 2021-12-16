@@ -13,7 +13,7 @@ namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
             _clientRepository = clientRepository;
         }
 
-        public async Task Consume(ConsumeContext<DeleteClientCommand> context)
+        public async Task Consume(ConsumeContext<DeleteClientCommand > context)
         {
 
             
