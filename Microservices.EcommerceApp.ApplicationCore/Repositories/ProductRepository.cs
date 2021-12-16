@@ -18,7 +18,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
         }
         public Task Delete(int Id)
         {
-            using var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(connectionString);
 
             const string query = @"
                 DELETE FROM Prodotto WHERE id=@Id
@@ -57,7 +57,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 
         public Task<Prodotto> GetById(int Id)
         {
-            using var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(connectionString);
 
             const string query = @"
                 SELECT 
@@ -81,7 +81,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 
         public Task<int> Insert(Prodotto prodotto)
         {
-            using var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(connectionString);
 
             const string query = @"
                 INSERT INTO [dbo].[prodotto]
@@ -110,7 +110,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 
         public Task Update(Prodotto prodotto)
         {
-            using var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(connectionString);
 
             const string query = @"
                 UPDATE [dbo].[prodotto]
