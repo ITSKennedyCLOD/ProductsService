@@ -78,39 +78,35 @@ namespace Microservices.EcommerceApp.API
                         });
 
 
-                        config.ReceiveEndpoint("gruppo2-CreateClientQueue", e =>
+                        config.ReceiveEndpoint("DeleteClientCommands", e =>
                         {
                             e.Consumer<DeleteClientConsumer>(context);
 
                         });
 
 
-                        config.ReceiveEndpoint("gruppo2-DeleteClientQueue", e =>
-                        {
-                            e.Consumer<DeleteClientConsumer>(context);
+                    
 
-                        });
-
-                        config.ReceiveEndpoint("gruppo2-UpdateClientQueue", e =>
+                        config.ReceiveEndpoint("UpdateClientCommands", e =>
                         {
                             e.Consumer<UpdateClientConsumer>(context);
 
                         });
 
-                        config.ReceiveEndpoint("gruppo2-NewOrderQueue", e =>
+                        config.ReceiveEndpoint("CreateOrderCommands", e =>
                         {
                             e.Consumer<NewOrderConsumer>(context);
 
                         });
 
-                        config.ReceiveEndpoint("gruppo2-DeleteOrderQueue", e =>
+                        config.ReceiveEndpoint("DeleteOrderCommands", e =>
                         {
                             
                             e.Consumer<DeleteOrderConsumer>(context);
 
                         });
 
-                        config.ReceiveEndpoint("gruppo2-UpdateOrderQueue", e =>
+                        config.ReceiveEndpoint("UpdateOrderCommands", e =>
                         {
                             e.Consumer<UpdateOrderConsumer>(context);
 

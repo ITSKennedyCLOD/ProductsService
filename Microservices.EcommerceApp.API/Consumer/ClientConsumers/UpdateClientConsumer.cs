@@ -1,12 +1,13 @@
 ﻿using Gruppo3.ClientiDTO.Domain.Entities;
 using Gruppo3.ClientiDTO.Domain.Events;
 using MassTransit;
+using Microservices.Ecommerce.DTO.Commands;
 using Microservices.EcommerceApp.ApplicationCore.Interfaces;
 using System.Threading.Tasks;
 
 namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
 {
-    public class UpdateClientConsumer : IConsumer<UpdateClientCommand>
+    public class UpdateClientConsumer : IConsumer<UpdateClientCommands>
     {
         private readonly IClientRepository _clientRepository;
         public UpdateClientConsumer(IClientRepository clientRepository)
@@ -15,18 +16,15 @@ namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
         }
 
 
-        public async Task Consume(ConsumeContext<UpdateClientCommand> context)
+        public async Task Consume(ConsumeContext<UpdateClientCommands> context)
         {
             var client = new Client
             {
                 Name = context.Message.Name,
-                Surname = context.Message.Surname,
-                Address = context.Message.Address,
+         
                 Businessname = context.Message.Businessname,
-                CF = context.Message.CF,
-                Email = context.Message.Email,
-                Piva = context.Message.Piva,
-                Year = context.Message.Year,
+
+
                 Id = context.Message.Id
             };
 
