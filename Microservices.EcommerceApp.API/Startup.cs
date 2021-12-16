@@ -71,14 +71,14 @@ namespace Microservices.EcommerceApp.API
 
                         config.ConfigureEndpoints(context);
 
-                        config.ReceiveEndpoint("CreateClientCommands", e =>
+                        config.ReceiveEndpoint("gruppo2-orchestratore-CreateClientCommands", e =>
                         {
                             e.Consumer<CreateClientConsumer>(context);
 
                         });
 
 
-                        config.ReceiveEndpoint("DeleteClientCommands", e =>
+                        config.ReceiveEndpoint("gruppo2-orchestratore-DeleteClientCommands", e =>
                         {
                             e.Consumer<DeleteClientConsumer>(context);
 
@@ -87,26 +87,26 @@ namespace Microservices.EcommerceApp.API
 
                     
 
-                        config.ReceiveEndpoint("UpdateClientCommands", e =>
+                        config.ReceiveEndpoint("gruppo2-orchestratore-UpdateClientCommands", e =>
                         {
                             e.Consumer<UpdateClientConsumer>(context);
 
                         });
 
-                        config.ReceiveEndpoint("CreateOrderCommands", e =>
+                        config.ReceiveEndpoint("gruppo2-orchestratore-CreateOrderCommands", e =>
                         {
                             e.Consumer<NewOrderConsumer>(context);
 
                         });
 
-                        config.ReceiveEndpoint("DeleteOrderCommands", e =>
+                        config.ReceiveEndpoint("gruppo2-orchestratore-DeleteOrderCommands", e =>
                         {
                             
                             e.Consumer<DeleteOrderConsumer>(context);
 
                         });
 
-                        config.ReceiveEndpoint("UpdateOrderCommands", e =>
+                        config.ReceiveEndpoint("gruppo2-orchestratore-UpdateOrderCommands", e =>
                         {
                             e.Consumer<UpdateOrderConsumer>(context);
 
