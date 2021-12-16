@@ -47,7 +47,7 @@ namespace Microservices.EcommerceApp.API.Controllers
             var id = await _productRepository.Insert(prodotto);
 
             await _publishEndpoint.Publish<NewProductEvent>(new NewProductEvent 
-            {
+            {   
                 Id = id,
                 Aliquota = prodotto.Aliquota,
                 Marca = prodotto.Marca,
@@ -59,13 +59,13 @@ namespace Microservices.EcommerceApp.API.Controllers
 
         // PUT api/<ProdottiController>/5
         [HttpPut("{id}")]
-        public Task Put(int id, [FromBody] Prodotto prodotto)
+        public async Task Put(int id, [FromBody] Prodotto prodotto)
         {
             prodotto.Id = id;
 
-            _productRepository.Update(prodotto);
+            await _productRepository.Update(prodotto);
 
-            _publishEndpoint.Publish<NewProductEvent>(new UpdateProductEvent
+            await _publishEndpoint.Publish<NewProductEvent>(new UpdateProductEvent
             {
                 Id = prodotto.Id,
                 Marca = prodotto.Marca,
@@ -73,23 +73,19 @@ namespace Microservices.EcommerceApp.API.Controllers
                 Descrizione = prodotto.Descrizione,
                 Prezzo = prodotto.Prezzo
             });
-
-            return _productRepository.Update(prodotto);
         }
 
         // DELETE api/<ProdottiController>/5
         [HttpDelete("{id}")]
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
 
-            _productRepository.Delete(id);
+            await _productRepository.Delete(id);
 
-            _publishEndpoint.Publish<NewProductEvent>(new DeleteProductEvent
+            await _publishEndpoint.Publish<NewProductEvent>(new DeleteProductEvent
             {
                 Id = id
             });
-
-            return null;
         }
     }
 }
