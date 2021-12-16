@@ -39,7 +39,7 @@ namespace Microservices.EcommerceApp.ApplicationCore.Repositories
 
             const string query = @"
                 SELECT
-                    [id] as Id,
+                    [id] as Id
                     ,[nome] as Nome
                     ,[descrizione] as Descrizione
                     ,[aliquota] as Aliquota
