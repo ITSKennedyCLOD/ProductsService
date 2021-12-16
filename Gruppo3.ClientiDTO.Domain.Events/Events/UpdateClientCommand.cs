@@ -1,6 +1,6 @@
 ﻿namespace Gruppo3.ClientiDTO.Domain.Events
 {
-    public class UpdateClientEvent
+    public class UpdateClientCommand
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Gruppo3.ClientiDTO.Domain.Events
 {
-    public class CreateClientEvent
+    public class CreateClientCommand
     {
         public int Id { get; set; }
         public string Name { get; set; }

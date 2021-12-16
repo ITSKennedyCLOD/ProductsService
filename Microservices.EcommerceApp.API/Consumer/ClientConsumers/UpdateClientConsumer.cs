@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
 {
-    public class UpdateClientConsumer : IConsumer<UpdateClientEvent>
+    public class UpdateClientConsumer : IConsumer<UpdateClientCommand>
     {
         private readonly IClientRepository _clientRepository;
         public UpdateClientConsumer(IClientRepository clientRepository)
@@ -15,7 +15,7 @@ namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
         }
 
 
-        public async Task Consume(ConsumeContext<UpdateClientEvent> context)
+        public async Task Consume(ConsumeContext<UpdateClientCommand> context)
         {
             var client = new Client
             {

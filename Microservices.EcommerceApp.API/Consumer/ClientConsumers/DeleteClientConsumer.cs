@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
 {
-    public class DeleteClientConsumer : IConsumer<DeleteClientEvent>
+    public class DeleteClientConsumer : IConsumer<DeleteClientCommand>
     {
         private readonly IClientRepository _clientRepository;
         public DeleteClientConsumer(IClientRepository clientRepository)
@@ -13,7 +13,7 @@ namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
             _clientRepository = clientRepository;
         }
 
-        public async Task Consume(ConsumeContext<DeleteClientEvent> context)
+        public async Task Consume(ConsumeContext<DeleteClientCommand> context)
         {
 
             

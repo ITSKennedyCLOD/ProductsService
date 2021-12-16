@@ -7,7 +7,7 @@ using Gruppo3.ClientiDTO.Domain.Entities;
 
 namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
 {
-    public class CreateClientConsumer : IConsumer<CreateClientEvent>
+    public class CreateClientConsumer : IConsumer<CreateClientCommand>
     {
         private readonly IClientRepository _clientRepository;
         public CreateClientConsumer(IClientRepository clientRepository)
@@ -15,7 +15,7 @@ namespace Microservices.EcommerceApp.API.Consumer.ClientConsumers
             _clientRepository = clientRepository;
         }
 
-        public async Task Consume(ConsumeContext<CreateClientEvent> context)
+        public async Task Consume(ConsumeContext<CreateClientCommand> context)
         {
             var client = new Client 
             {
